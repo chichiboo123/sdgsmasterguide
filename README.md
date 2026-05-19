@@ -2,8 +2,6 @@
 
 > **SDGs Master 앱**을 활용한 직소(Jigsaw) 팀 활동 수업 가이드 웹앱
 
-[![GitHub Pages](https://img.shields.io/badge/배포-GitHub%20Pages-2F5E9E?style=flat-square&logo=github)](https://chichiboo123.github.io/sdgsmasterguide/)
-
 ---
 
 ## 소개

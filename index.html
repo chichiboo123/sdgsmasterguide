@@ -186,63 +186,14 @@
     }
     .big-link:hover { box-shadow: var(--shadow-sm); }
 
-    /* ── 수업 단계 진행 표시 ─────────────────────────────────── */
-    .lesson-progress-wrap {
-      margin-top: 28px;
-      background: rgba(255,255,255,.88); border: 1px solid var(--line);
-      border-radius: 22px; padding: 18px 20px; box-shadow: var(--shadow-sm);
+    /* ── 기록 카드 소개글 ────────────────────────────────────── */
+    .card-intro {
+      font-size: 14px; line-height: 1.65; color: var(--muted);
+      background: color-mix(in srgb, var(--rc) 6%, #f8faff);
+      border-left: 3px solid var(--rc);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 14px; margin: 0 0 14px;
     }
-    .lesson-progress-head {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      margin-bottom: 14px;
-    }
-    .lesson-progress-head strong { font-size: 16px; font-weight: 800; color: var(--deep); }
-    .lesson-progress-head span { font-size: 13px; color: var(--muted); }
-    .step-track {
-      display: flex; align-items: flex-start; gap: 0;
-      overflow-x: auto; padding-bottom: 4px; scrollbar-width: none;
-    }
-    .step-track::-webkit-scrollbar { display: none; }
-    .step-unit {
-      display: flex; align-items: flex-start; gap: 0; flex: 0 0 auto;
-    }
-    .step-node {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      cursor: pointer; touch-action: manipulation;
-      padding: 0 4px; border: none; background: none; appearance: none;
-    }
-    .step-circle {
-      width: 52px; height: 52px; border-radius: 50%;
-      display: grid; place-items: center;
-      font-weight: 900; font-size: 19px;
-      background: color-mix(in srgb, var(--sc, #aaa) 14%, #f4f4f4);
-      color: color-mix(in srgb, var(--sc, #888) 75%, #444);
-      border: 2px solid color-mix(in srgb, var(--sc, #ccc) 28%, #e0e0e0);
-      transition: all .22s; flex-shrink: 0;
-    }
-    .step-node.active .step-circle {
-      background: var(--sc, var(--blue)); color: white;
-      border-color: var(--sc, var(--blue));
-      transform: scale(1.14);
-      box-shadow: 0 6px 18px rgba(0,0,0,.22);
-    }
-    .step-node.done .step-circle {
-      background: var(--green); color: white; border-color: var(--green);
-    }
-    .step-label-text {
-      font-size: 12px; font-weight: 700; color: var(--muted);
-      text-align: center; max-width: 60px;
-      line-height: 1.35; word-break: keep-all;
-    }
-    .step-node.active .step-label-text { color: var(--deep); font-weight: 800; }
-    .step-node.done .step-label-text { color: var(--green); }
-    .step-connector {
-      width: 28px; height: 3px; border-radius: 2px;
-      background: var(--line); flex: 0 0 auto;
-      margin-top: 26px; /* 52px 원의 중심(26px) 정렬 */
-      transform: translateY(-50%);
-    }
-    .step-connector.done { background: var(--green); }
 
     /* ── 섹션 공통 ───────────────────────────────────────────── */
     .section { margin-top: 32px; }
@@ -636,17 +587,6 @@
       </aside>
     </section>
 
-    <!-- ── 수업 단계 진행 표시 ─────────────────────────────── -->
-    <div class="lesson-progress-wrap" aria-label="수업 단계 진행 상황">
-      <div class="lesson-progress-head">
-        <strong><span class="ms fill">play_circle</span> 지금 우리 반은 몇 단계인가요?</strong>
-        <span>단계를 눌러 표시하세요</span>
-      </div>
-      <div class="step-track" role="group" aria-label="수업 단계 선택">
-        <!-- JS로 생성 -->
-      </div>
-    </div>
-
     <!-- ── 수업 흐름 ──────────────────────────────────────── -->
     <section class="section" id="flow" aria-labelledby="flow-title">
       <div class="section-head">
@@ -656,43 +596,37 @@
         </div>
       </div>
       <div class="flow" role="list">
-        <article class="flow-item" style="--c:#E5243B" role="listitem" onclick="setLessonStep(0)" tabindex="0" aria-label="1단계: 역할 나누기">
-          <div class="flow-active-badge">현재 단계</div>
+        <article class="flow-item" style="--c:#E5243B" role="listitem">
           <div class="flow-num">1</div>
           <span class="flow-emoji">👥</span>
           <div class="flow-title">역할 나누기</div>
           <p class="flow-text">팀 안에서 네 가지 역할을 정합니다.</p>
         </article>
-        <article class="flow-item" style="--c:#DDA63A" role="listitem" onclick="setLessonStep(1)" tabindex="0" aria-label="2단계: 앱으로 활동하기">
-          <div class="flow-active-badge">현재 단계</div>
+        <article class="flow-item" style="--c:#DDA63A" role="listitem">
           <div class="flow-num">2</div>
           <span class="flow-emoji">📱</span>
           <div class="flow-title">앱으로 활동하기</div>
           <p class="flow-text">SDGs 선택, 사례 발견, 생각과 실천을 정리합니다.</p>
         </article>
-        <article class="flow-item" style="--c:#4C9F38" role="listitem" onclick="setLessonStep(2)" tabindex="0" aria-label="3단계: 카드 만들기">
-          <div class="flow-active-badge">현재 단계</div>
+        <article class="flow-item" style="--c:#4C9F38" role="listitem">
           <div class="flow-num">3</div>
           <span class="flow-emoji">🎨</span>
           <div class="flow-title">카드 만들기</div>
           <p class="flow-text">팀별 대표 기기에서 마스터 카드 1장을 완성합니다.</p>
         </article>
-        <article class="flow-item" style="--c:#26BDE2" role="listitem" onclick="setLessonStep(3)" tabindex="0" aria-label="4단계: 직소 회의">
-          <div class="flow-active-badge">현재 단계</div>
+        <article class="flow-item" style="--c:#26BDE2" role="listitem">
           <div class="flow-num">4</div>
           <span class="flow-emoji">🤝</span>
-          <div class="flow-title">직소 회의</div>
-          <p class="flow-text">같은 역할끼리 모여 설명 방법을 준비합니다.</p>
+          <div class="flow-title">전문가 모임</div>
+          <p class="flow-text">같은 역할끼리 모여 각 팀의 결과를 나누고 설명을 연습합니다.</p>
         </article>
-        <article class="flow-item" style="--c:#FD9D24" role="listitem" onclick="setLessonStep(4)" tabindex="0" aria-label="5단계: 패들렛 공유">
-          <div class="flow-active-badge">현재 단계</div>
+        <article class="flow-item" style="--c:#FD9D24" role="listitem">
           <div class="flow-num">5</div>
           <span class="flow-emoji">📤</span>
           <div class="flow-title">패들렛 공유</div>
           <p class="flow-text">카드 결과물과 팀원 역할만 간단히 올립니다.</p>
         </article>
-        <article class="flow-item" style="--c:#A21942" role="listitem" onclick="setLessonStep(5)" tabindex="0" aria-label="6단계: 전체 발표">
-          <div class="flow-active-badge">현재 단계</div>
+        <article class="flow-item" style="--c:#A21942" role="listitem">
           <div class="flow-num">6</div>
           <span class="flow-emoji">🎤</span>
           <div class="flow-title">전체 발표</div>
@@ -717,8 +651,8 @@
         </article>
         <article class="role-card" style="--c:#4C9F38">
           <div class="role-icon"><span class="ms fill">search</span></div>
-          <h3>사례 발견가</h3>
-          <p>우리 팀이 찾은 사례와 정보 출처를 정확하고 쉽게 설명합니다.</p>
+          <h3>사례 해설가</h3>
+          <p>우리 팀이 조사한 사례를 쉽고 정확하게 해설합니다.</p>
         </article>
         <article class="role-card" style="--c:#26BDE2">
           <div class="role-icon"><span class="ms fill">devices</span></div>
@@ -776,8 +710,8 @@
     <section class="section" id="records" aria-labelledby="records-title">
       <div class="section-head">
         <div>
-          <h2 id="records-title"><span class="ms fill">edit_note</span> 우리 팀 기록장</h2>
-          <p class="section-desc">내 역할을 골라 질문에 답해 보세요. 다 쓰면 원래 팀에서 함께 나눠요!</p>
+          <h2 id="records-title"><span class="ms fill">edit_note</span> 전문가 모임 기록장</h2>
+          <p class="section-desc">같은 역할끼리 모여 각 팀의 결과를 나누고, 더 잘 설명하는 방법을 함께 연습해요.</p>
         </div>
         <div class="tools">
           <button class="tool-btn primary" type="button" onclick="saveRecords()"><span class="ms">save</span> 저장</button>
@@ -785,16 +719,16 @@
         </div>
       </div>
 
-      <!-- 팀 기본 정보 -->
+      <!-- 기본 정보 -->
       <div class="card" style="margin-bottom:16px">
         <div class="record-grid">
           <div class="question">
-            <label for="teamName">팀 이름</label>
-            <input id="teamName" type="text" placeholder="우리 팀 이름을 적어 보세요." />
+            <label for="teamName">내 이름 &amp; 우리 팀 이름</label>
+            <input id="teamName" type="text" placeholder="예) 김민준 / 지구지킴이 팀" />
           </div>
           <div class="question">
-            <label for="teamRoles">우리 팀 역할 분담</label>
-            <input id="teamRoles" type="text" placeholder="예) 탐색가: 민준 / 발견가: 서연 / ..." />
+            <label for="teamRoles">우리 팀이 선택한 SDGs 목표</label>
+            <input id="teamRoles" type="text" placeholder="예) SDGs 13번 기후행동" />
           </div>
         </div>
       </div>
@@ -809,7 +743,7 @@
           </button>
           <button class="role-sel-btn" style="--rc:#4C9F38" data-role="case" onclick="selectRole('case')" aria-pressed="false" type="button">
             <div class="rs-icon"><span class="ms fill">search</span></div>
-            사례 발견가
+            사례 해설가
           </button>
           <button class="role-sel-btn" style="--rc:#26BDE2" data-role="digital" onclick="selectRole('digital')" aria-pressed="false" type="button">
             <div class="rs-icon"><span class="ms fill">devices</span></div>
@@ -824,105 +758,123 @@
 
       <!-- 역할별 기록 카드 -->
       <div class="record-grid">
-        <!-- SDGs 탐색가 -->
+
+        <!-- SDGs 탐색가 전문가 모임 -->
         <article class="record-card" id="rec-sdgs" style="--rc:#2F5E9E">
           <div class="record-head">
             <div class="role-icon" style="background:#2F5E9E"><span class="ms fill">travel_explore</span></div>
-            <h3>SDGs 탐색가 회의</h3>
+            <h3>🔭 SDGs 탐색가 전문가 모임</h3>
             <div class="record-actions">
-              <button class="mini-btn" type="button" onclick="copyChapterText('rec-sdgs','SDGs 탐색가 회의')"><span class="ms">content_copy</span>텍스트</button>
-              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-sdgs','SDGs 탐색가 회의')"><span class="ms">image</span>이미지</button>
+              <button class="mini-btn" type="button" onclick="copyChapterText('rec-sdgs','SDGs 탐색가 전문가 모임')"><span class="ms">content_copy</span>텍스트</button>
+              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-sdgs','SDGs 탐색가 전문가 모임')"><span class="ms">image</span>이미지</button>
             </div>
           </div>
+          <p class="card-intro">각 팀의 SDGs 탐색가들이 모였어요! 우리 팀이 선택한 목표를 친구들에게 쉽게 설명하는 방법을 연습하고, 서로의 표현에서 배워요.</p>
           <div class="question">
-            <label for="r1a">우리 팀이 선택한 SDGs는?</label>
-            <textarea id="r1a" placeholder="우리 팀이 선택한 SDGs 번호와 이름을 적어 보세요."></textarea>
+            <label for="r1a">우리 팀이 선택한 SDGs 목표 번호와 이름은?</label>
+            <textarea id="r1a" placeholder="SDGs 목표 번호와 공식 이름을 적어 보세요. (예: SDGs 13번 기후행동)"></textarea>
           </div>
           <div class="question">
-            <label for="r1b">이 목표를 쉬운 말로 설명하면?</label>
-            <textarea id="r1b" placeholder="친구들이 바로 이해할 수 있도록 쉬운 말로 풀어 써 보세요."></textarea>
+            <label for="r1b">이 목표를 친구들이 바로 이해할 수 있도록 쉬운 말로 설명하면?</label>
+            <textarea id="r1b" placeholder="어려운 단어 없이 초등학생 눈높이로 풀어 써 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r1c">우리 팀 사례와 연결되는 이유는?</label>
-            <textarea id="r1c" placeholder="우리 팀의 사례가 선택한 SDGs와 어떻게 이어지는지 적어 보세요."></textarea>
+            <label for="r1c">전문가 모임에서 인상 깊었던 다른 팀의 설명 방법이나 표현은?</label>
+            <textarea id="r1c" placeholder="다른 탐색가에게 배운 좋은 표현이나 설명 방식을 기록해요."></textarea>
+          </div>
+          <div class="question">
+            <label for="r1d">원래 팀으로 돌아가서 어떻게 더 잘 설명할 건가요?</label>
+            <textarea id="r1d" placeholder="전문가 모임에서 배운 점을 반영해 업그레이드된 설명을 써 보세요."></textarea>
           </div>
         </article>
 
-        <!-- 사례 발견가 -->
+        <!-- 사례 해설가 전문가 모임 -->
         <article class="record-card" id="rec-case" style="--rc:#4C9F38">
           <div class="record-head">
             <div class="role-icon" style="background:#4C9F38"><span class="ms fill">search</span></div>
-            <h3>사례 발견가 회의</h3>
+            <h3>🔍 사례 해설가 전문가 모임</h3>
             <div class="record-actions">
-              <button class="mini-btn" type="button" onclick="copyChapterText('rec-case','사례 발견가 회의')"><span class="ms">content_copy</span>텍스트</button>
-              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-case','사례 발견가 회의')"><span class="ms">image</span>이미지</button>
+              <button class="mini-btn" type="button" onclick="copyChapterText('rec-case','사례 해설가 전문가 모임')"><span class="ms">content_copy</span>텍스트</button>
+              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-case','사례 해설가 전문가 모임')"><span class="ms">image</span>이미지</button>
             </div>
           </div>
+          <p class="card-intro">각 팀의 사례 해설가들이 모였어요! 우리 팀이 조사한 사례를 쉽고 정확하게 해설하는 방법을 연습하고, 서로의 사례를 통해 더 많이 배워요.</p>
           <div class="question">
-            <label for="r2a">우리 팀이 찾은 사례는?</label>
-            <textarea id="r2a" placeholder="어디에서 어떤 장면이나 문제를 발견했는지 구체적으로 적어 보세요."></textarea>
+            <label for="r2a">우리 팀이 조사한 사례는?</label>
+            <textarea id="r2a" placeholder="어디에서, 어떤 장면이나 문제를 발견했는지 구체적으로 적어 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r2b">정보 출처는?</label>
-            <textarea id="r2b" placeholder="직접 본 것인지, 책·뉴스·웹사이트에서 찾은 것인지 적어 보세요."></textarea>
+            <label for="r2b">이 사례가 우리 팀이 선택한 SDGs와 어떻게 연결되나요?</label>
+            <textarea id="r2b" placeholder="사례와 SDGs 목표의 연결 고리를 쉽게 설명해 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r2c">이 사례가 보여 주는 문제는?</label>
-            <textarea id="r2c" placeholder="이 사례를 통해 어떤 문제를 생각하게 되었는지 적어 보세요."></textarea>
+            <label for="r2c">정보 출처는 어디인가요?</label>
+            <textarea id="r2c" placeholder="직접 본 것인지, 책·뉴스·웹사이트에서 찾은 것인지 적어 보세요."></textarea>
+          </div>
+          <div class="question">
+            <label for="r2d">전문가 모임에서 배운 사례 해설 방법이나 좋은 표현은?</label>
+            <textarea id="r2d" placeholder="다른 해설가의 설명에서 배운 점이나 따라 하고 싶은 방법을 적어요."></textarea>
           </div>
         </article>
 
-        <!-- 디지털 전문가 -->
+        <!-- 디지털 전문가 전문가 모임 -->
         <article class="record-card" id="rec-digital" style="--rc:#26BDE2">
           <div class="record-head">
             <div class="role-icon" style="background:#26BDE2"><span class="ms fill">devices</span></div>
-            <h3>디지털 전문가 회의</h3>
+            <h3>💻 디지털 전문가 전문가 모임</h3>
             <div class="record-actions">
-              <button class="mini-btn" type="button" onclick="copyChapterText('rec-digital','디지털 전문가 회의')"><span class="ms">content_copy</span>텍스트</button>
-              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-digital','디지털 전문가 회의')"><span class="ms">image</span>이미지</button>
+              <button class="mini-btn" type="button" onclick="copyChapterText('rec-digital','디지털 전문가 전문가 모임')"><span class="ms">content_copy</span>텍스트</button>
+              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-digital','디지털 전문가 전문가 모임')"><span class="ms">image</span>이미지</button>
             </div>
           </div>
+          <p class="card-intro">각 팀의 디지털 전문가들이 모였어요! 앱 사용 경험을 솔직하게 나누고, 어린이가 쓰기 더 좋은 앱을 함께 고민해요.</p>
           <div class="question">
-            <label for="r3a">앱에서 좋았던 점은?</label>
-            <textarea id="r3a" placeholder="앱을 사용하며 편리하거나 보기 좋았던 부분을 적어 보세요."></textarea>
+            <label for="r3a">앱에서 좋았던 점과 불편했던 점은?</label>
+            <textarea id="r3a" placeholder="편리했거나 보기 좋았던 점, 헷갈리거나 아쉬웠던 점을 솔직하게 적어 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r3b">앱에서 어려웠던 점은?</label>
-            <textarea id="r3b" placeholder="어린이가 사용할 때 헷갈리거나 어려웠던 부분을 적어 보세요."></textarea>
+            <label for="r3b">전문가 모임에서 함께 이야기한 앱 개선 아이디어는?</label>
+            <textarea id="r3b" placeholder="여러 전문가의 의견 중 가장 좋은 개선 아이디어를 정리해 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r3c">더 좋아지려면?</label>
-            <textarea id="r3c" placeholder="어린이가 더 쉽게 사용할 수 있으려면 어떤 점이 바뀌면 좋을지 적어 보세요."></textarea>
+            <label for="r3c">어린이를 위해 새로 만들고 싶은 기능이나 앱 아이디어는?</label>
+            <textarea id="r3c" placeholder="이런 기능이 있으면 더 재밌고 유익할 것 같다는 아이디어를 자유롭게 적어요."></textarea>
           </div>
           <div class="question">
-            <label for="r3d">다음 활동을 도와줄 앱 아이디어는?</label>
-            <textarea id="r3d" placeholder="다음 활동에서 친구들을 도와줄 수 있는 앱이 있다면 어떤 활동을 도와주면 좋을지 적어 보세요."></textarea>
+            <label for="r3d">우리 전문가 모임이 선정한 최고의 아이디어 한 가지는?</label>
+            <textarea id="r3d" placeholder="모임에서 가장 반응이 좋았던 아이디어를 골라 이유와 함께 적어 보세요."></textarea>
           </div>
         </article>
 
-        <!-- 카드 설명사 -->
+        <!-- 카드 설명사 전문가 모임 -->
         <article class="record-card" id="rec-present" style="--rc:#FD9D24">
           <div class="record-head">
             <div class="role-icon" style="background:#FD9D24"><span class="ms fill">campaign</span></div>
-            <h3>카드 설명사 회의</h3>
+            <h3>🎤 카드 설명사 전문가 모임</h3>
             <div class="record-actions">
-              <button class="mini-btn" type="button" onclick="copyChapterText('rec-present','카드 설명사 회의')"><span class="ms">content_copy</span>텍스트</button>
-              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-present','카드 설명사 회의')"><span class="ms">image</span>이미지</button>
+              <button class="mini-btn" type="button" onclick="copyChapterText('rec-present','카드 설명사 전문가 모임')"><span class="ms">content_copy</span>텍스트</button>
+              <button class="mini-btn" type="button" onclick="copyChapterImage('rec-present','카드 설명사 전문가 모임')"><span class="ms">image</span>이미지</button>
             </div>
           </div>
+          <p class="card-intro">각 팀의 카드 설명사들이 모였어요! 마스터 카드를 전달력 있게 발표하는 방법을 연습하고, 서로 피드백을 주고받으며 실력을 키워요.</p>
           <div class="question">
-            <label for="r4a">우리 팀 카드를 한 문장으로 소개하면?</label>
-            <textarea id="r4a" placeholder="우리 팀 카드가 어떤 내용을 담고 있는지 한 문장으로 적어 보세요."></textarea>
+            <label for="r4a">우리 팀 마스터 카드를 한 문장으로 소개하면?</label>
+            <textarea id="r4a" placeholder="카드의 핵심 내용을 한 문장으로 딱 정리해 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r4b">발표 순서는?</label>
-            <textarea id="r4b" placeholder="친구들이 이해하기 좋은 발표 순서를 정리해 보세요."></textarea>
+            <label for="r4b">전달력 있는 발표를 위한 순서와 강조할 내용은?</label>
+            <textarea id="r4b" placeholder="어떤 순서로, 어떤 내용을 특히 강조해서 발표할지 정리해 보세요."></textarea>
           </div>
           <div class="question">
-            <label for="r4c">발표에서 꼭 강조할 말은?</label>
-            <textarea id="r4c" placeholder="발표를 들은 친구들이 꼭 기억했으면 하는 말을 적어 보세요."></textarea>
+            <label for="r4c">발표 연습을 하면서 받은 피드백은?</label>
+            <textarea id="r4c" placeholder="다른 설명사나 친구들에게 들은 조언이나 칭찬을 기록해요."></textarea>
+          </div>
+          <div class="question">
+            <label for="r4d">더 잘 전달하기 위해 고치고 싶은 점은?</label>
+            <textarea id="r4d" placeholder="발표를 더 잘하려면 어떤 부분을 더 연습하면 좋을지 적어 보세요."></textarea>
           </div>
         </article>
+
       </div>
     </section>
 
@@ -948,7 +900,7 @@
 
 본문:
 SDGs 탐색가: 민준
-사례 발견가: 서연
+사례 해설가: 서연
 디지털 전문가: 하준
 카드 설명사: 지우</pre>
         </div>
@@ -1002,7 +954,7 @@ SDGs 탐색가: 민준
         title: "역할 나누기",
         body: `<ul>
                 <li><strong>SDGs 탐색가</strong>: 선택한 SDGs를 쉽게 설명합니다.</li>
-                <li><strong>사례 발견가</strong>: 사례와 정보 출처를 설명합니다.</li>
+                <li><strong>사례 해설가</strong>: 사례와 정보 출처를 설명합니다.</li>
                 <li><strong>디지털 전문가</strong>: 앱의 좋았던 점과 발전 방향을 제안합니다.</li>
                 <li><strong>카드 설명사</strong>: 완성된 카드를 활용해 발표합니다.</li>
                </ul>`,
@@ -1016,10 +968,15 @@ SDGs 탐색가: 민준
         note: "한 사람이 마음대로 입력하지 않고, 팀원이 함께 확인하며 입력합니다."
       },
       {
-        title: "역할별 직소 회의",
-        body: `<p>카드를 만든 뒤 같은 역할끼리 모입니다.</p>
-               <ul><li>탐색가: SDGs 설명 준비</li><li>발견가: 사례와 출처 설명 준비</li><li>디지털 전문가: 앱 UI·UX 회의</li><li>설명사: 발표 순서 준비</li></ul>`,
-        note: "전문가 모임에서 준비한 내용을 다시 원래 팀으로 가져갑니다."
+        title: "역할별 전문가 모임",
+        body: `<p>카드를 만든 뒤, 같은 역할끼리 모여 전문성을 키웁니다.</p>
+               <ul>
+                 <li><strong>탐색가</strong>: 각 팀의 SDGs를 쉽게 설명하는 방법 연습</li>
+                 <li><strong>해설가</strong>: 각 팀의 사례를 쉽고 정확하게 해설하는 방법 연습</li>
+                 <li><strong>디지털 전문가</strong>: 앱 사용 경험 공유 및 개선 아이디어 토론</li>
+                 <li><strong>설명사</strong>: 발표 연습 및 서로 피드백 주고받기</li>
+               </ul>`,
+        note: "전문가 모임에서 익힌 내용을 원래 팀으로 가져가 함께 나눕니다."
       },
       {
         title: "패들렛에 공유하기",
@@ -1036,71 +993,9 @@ SDGs 탐색가: 민준
       }
     ];
 
-    /* ── 수업 단계 데이터 ────────────────────────────────────── */
-    const stepData = [
-      { label: "역할\n나누기",  color: "#E5243B" },
-      { label: "앱\n활동",     color: "#DDA63A" },
-      { label: "카드\n만들기", color: "#4C9F38" },
-      { label: "직소\n회의",   color: "#26BDE2" },
-      { label: "패들렛\n공유", color: "#FD9D24" },
-      { label: "전체\n발표",   color: "#A21942" },
-    ];
-
     /* ── 상태 ────────────────────────────────────────────────── */
     let currentSlide = 0;
-    let currentStep  = parseInt(localStorage.getItem('sdgs_lesson_step') ?? '-1');
     let selectedRole = localStorage.getItem('sdgs_selected_role') || '';
-
-    /* ── 수업 단계 진행 표시 렌더 ────────────────────────────── */
-    function renderStepTrack() {
-      const track = document.querySelector('.step-track');
-      if (!track) return;
-      track.innerHTML = '';
-      stepData.forEach((s, i) => {
-        const unit = document.createElement('div');
-        unit.className = 'step-unit';
-
-        const node = document.createElement('button');
-        const isDone   = i < currentStep;
-        const isActive = i === currentStep;
-        node.className = 'step-node' + (isActive ? ' active' : '') + (isDone ? ' done' : '');
-        node.type = 'button';
-        node.setAttribute('aria-label', `${i+1}단계: ${s.label.replace(/\n/g,' ')}`);
-        node.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        node.style.setProperty('--sc', s.color);
-        node.onclick = () => setLessonStep(i);
-
-        const circle = document.createElement('div');
-        circle.className = 'step-circle';
-        /* 완료 단계는 ✓, 나머지는 숫자 — CSS 클래스로만 색상 제어 */
-        circle.textContent = isDone ? '✓' : i + 1;
-
-        const lbl = document.createElement('div');
-        lbl.className = 'step-label-text';
-        lbl.textContent = s.label.replace(/\n/g, ' ');
-
-        node.append(circle, lbl);
-        unit.appendChild(node);
-
-        if (i < stepData.length - 1) {
-          const conn = document.createElement('div');
-          conn.className = 'step-connector' + (isDone ? ' done' : '');
-          unit.appendChild(conn);
-        }
-
-        track.appendChild(unit);
-      });
-    }
-
-    function setLessonStep(i) {
-      currentStep = (currentStep === i) ? -1 : i; // 같은 단계 누르면 해제
-      localStorage.setItem('sdgs_lesson_step', currentStep);
-      renderStepTrack();
-      // 흐름 카드 강조
-      document.querySelectorAll('.flow-item').forEach((el, idx) => {
-        el.classList.toggle('active', idx === currentStep);
-      });
-    }
 
     /* ── 슬라이드 ────────────────────────────────────────────── */
     function setSlide(i) {
@@ -1196,7 +1091,7 @@ SDGs 탐색가: 민준
     window.addEventListener('scroll', updateBottomNav, { passive: true });
 
     /* ── 기록 저장/불러오기 ─────────────────────────────────── */
-    const recordIds = ['teamName','teamRoles','r1a','r1b','r1c','r2a','r2b','r2c','r3a','r3b','r3c','r3d','r4a','r4b','r4c'];
+    const recordIds = ['teamName','teamRoles','r1a','r1b','r1c','r1d','r2a','r2b','r2c','r2d','r3a','r3b','r3c','r3d','r4a','r4b','r4c','r4d'];
 
     function saveRecords() {
       const data = {};
@@ -1300,15 +1195,7 @@ SDGs 탐색가: 민준
     /* ── 초기화 ──────────────────────────────────────────────── */
     renderDots();
     setSlide(0);
-    renderStepTrack();
     loadRecords();
-
-    // 저장된 단계 적용
-    if (currentStep >= 0) {
-      document.querySelectorAll('.flow-item').forEach((el, idx) => {
-        el.classList.toggle('active', idx === currentStep);
-      });
-    }
 
     // 저장된 역할 적용
     if (selectedRole) {

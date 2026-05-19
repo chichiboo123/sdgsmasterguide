@@ -70,15 +70,18 @@
       font-variation-settings: 'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
     }
     .ms.fill { font-variation-settings: 'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 24; }
-    -webkit-tap-highlight-color: transparent;
+    * { -webkit-tap-highlight-color: transparent; }
 
     /* ── 접근성 ──────────────────────────────────────────────── */
     .skip {
-      position: absolute; left: 12px; top: -80px; z-index: 1000;
-      padding: 12px 16px; border-radius: 12px;
+      position: fixed; left: 0; top: 0; z-index: 1000;
+      padding: 12px 20px; border-radius: 0 0 14px 0;
       background: var(--deep); color: white; text-decoration: none;
+      font-weight: 700; font-size: 15px;
+      transform: translateY(-110%);
+      transition: transform .2s ease;
     }
-    .skip:focus { top: 12px; }
+    .skip:focus { transform: translateY(0); }
 
     /* ── 헤더 ────────────────────────────────────────────────── */
     header {
@@ -206,34 +209,38 @@
     .step-node {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       cursor: pointer; touch-action: manipulation;
-      padding: 0 2px;
+      padding: 0 4px; border: none; background: none; appearance: none;
     }
     .step-circle {
-      width: 44px; height: 44px; border-radius: 14px;
+      width: 52px; height: 52px; border-radius: 50%;
       display: grid; place-items: center;
-      font-weight: 900; font-size: 17px;
-      background: var(--line); color: var(--muted);
-      transition: all .2s; border: 2px solid transparent;
+      font-weight: 900; font-size: 19px;
+      background: color-mix(in srgb, var(--sc, #aaa) 14%, #f4f4f4);
+      color: color-mix(in srgb, var(--sc, #888) 75%, #444);
+      border: 2px solid color-mix(in srgb, var(--sc, #ccc) 28%, #e0e0e0);
+      transition: all .22s; flex-shrink: 0;
     }
     .step-node.active .step-circle {
       background: var(--sc, var(--blue)); color: white;
-      transform: scale(1.12);
-      box-shadow: 0 6px 16px rgba(0,0,0,.18);
+      border-color: var(--sc, var(--blue));
+      transform: scale(1.14);
+      box-shadow: 0 6px 18px rgba(0,0,0,.22);
     }
     .step-node.done .step-circle {
-      background: #e8f4e8; color: var(--green); border-color: var(--green);
+      background: var(--green); color: white; border-color: var(--green);
     }
-    .step-node.done .step-circle::after { content: "✓"; font-size: 18px; }
     .step-label-text {
-      font-size: 11px; font-weight: 700; color: var(--muted);
-      text-align: center; white-space: nowrap; max-width: 56px;
-      line-height: 1.3;
+      font-size: 12px; font-weight: 700; color: var(--muted);
+      text-align: center; max-width: 60px;
+      line-height: 1.35; word-break: keep-all;
     }
-    .step-node.active .step-label-text { color: var(--deep); }
+    .step-node.active .step-label-text { color: var(--deep); font-weight: 800; }
+    .step-node.done .step-label-text { color: var(--green); }
     .step-connector {
-      width: 28px; height: 2px;
+      width: 28px; height: 3px; border-radius: 2px;
       background: var(--line); flex: 0 0 auto;
-      margin-top: 21px; /* 원의 중앙 정렬 */
+      margin-top: 26px; /* 52px 원의 중심(26px) 정렬 */
+      transform: translateY(-50%);
     }
     .step-connector.done { background: var(--green); }
 
@@ -261,7 +268,8 @@
     .flow-item.active { border-color: var(--c,var(--blue)); box-shadow: 0 0 0 3px rgba(47,94,158,.15), var(--shadow-sm); }
     .flow-item.active .flow-num { transform: scale(1.08); }
     .flow-num { width: 36px; height: 36px; border-radius: 12px; background: var(--c,#2F5E9E); color: white; display: grid; place-items: center; font-weight: 900; font-size: 17px; transition: transform .2s; }
-    .flow-title { font-size: 17px; font-weight: 830; margin: 12px 0 6px; color: var(--deep); }
+    .flow-emoji { font-size: 26px; line-height: 1; margin: 10px 0 4px; display: block; }
+    .flow-title { font-size: 17px; font-weight: 830; margin: 4px 0 6px; color: var(--deep); }
     .flow-text { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 0; }
     .flow-active-badge {
       display: none; position: absolute; top: 14px; right: 14px;
@@ -319,7 +327,8 @@
     .slide-body { font-size: 19px; line-height: 1.8; color: #334155; max-width: 780px; }
     .slide-body ul { padding-left: 1.15em; }
     .slide-body li { margin: 8px 0; }
-    .slide-note { margin-top: 22px; background: rgba(47,94,158,.08); border: 1px solid rgba(47,94,158,.16); border-radius: 20px; padding: 16px; color: var(--deep); font-size: 16px; line-height: 1.6; }
+    .slide-note { margin-top: 22px; background: rgba(255,209,102,.15); border: 1px solid rgba(255,209,102,.55); border-radius: 20px; padding: 16px 18px; color: #5c4200; font-size: 16px; line-height: 1.6; }
+    .slide-note::before { content: "💡 선생님 힌트  "; font-weight: 800; }
 
     /* 슬라이드 이전/다음 네비게이션 */
     .slide-nav-bar {
@@ -366,10 +375,11 @@
     }
     .role-sel-btn {
       display: flex; flex-direction: column; align-items: center; gap: 10px;
-      border: 2px solid rgba(255,255,255,.8); background: white; border-radius: 20px;
-      padding: 18px 8px; cursor: pointer; touch-action: manipulation;
-      font-weight: 800; font-size: 14px; color: var(--deep); text-align: center;
-      min-height: 100px; transition: all .18s; position: relative;
+      border: 2px solid rgba(255,255,255,.8); background: white; border-radius: 22px;
+      padding: 20px 8px 16px; cursor: pointer; touch-action: manipulation;
+      font-weight: 800; font-size: 16px; color: var(--deep); text-align: center;
+      min-height: 116px; transition: all .18s; position: relative;
+      line-height: 1.3; word-break: keep-all;
     }
     .role-sel-btn .rs-icon {
       width: 48px; height: 48px; border-radius: 16px;
@@ -403,7 +413,7 @@
     .record-actions { display: flex; gap: 6px; margin-left: auto; }
 
     .question { margin: 14px 0; }
-    .question label { display: block; font-weight: 760; color: var(--deep); margin-bottom: 8px; font-size: 15px; }
+    .question label { display: block; font-weight: 800; color: var(--deep); margin-bottom: 8px; font-size: 16px; }
     textarea, input[type="text"] {
       width: 100%; border: 1.5px solid var(--line); border-radius: 16px;
       padding: 14px 16px; background: #FBFCFF; color: var(--ink);
@@ -649,36 +659,42 @@
         <article class="flow-item" style="--c:#E5243B" role="listitem" onclick="setLessonStep(0)" tabindex="0" aria-label="1단계: 역할 나누기">
           <div class="flow-active-badge">현재 단계</div>
           <div class="flow-num">1</div>
+          <span class="flow-emoji">👥</span>
           <div class="flow-title">역할 나누기</div>
           <p class="flow-text">팀 안에서 네 가지 역할을 정합니다.</p>
         </article>
         <article class="flow-item" style="--c:#DDA63A" role="listitem" onclick="setLessonStep(1)" tabindex="0" aria-label="2단계: 앱으로 활동하기">
           <div class="flow-active-badge">현재 단계</div>
           <div class="flow-num">2</div>
+          <span class="flow-emoji">📱</span>
           <div class="flow-title">앱으로 활동하기</div>
           <p class="flow-text">SDGs 선택, 사례 발견, 생각과 실천을 정리합니다.</p>
         </article>
         <article class="flow-item" style="--c:#4C9F38" role="listitem" onclick="setLessonStep(2)" tabindex="0" aria-label="3단계: 카드 만들기">
           <div class="flow-active-badge">현재 단계</div>
           <div class="flow-num">3</div>
+          <span class="flow-emoji">🎨</span>
           <div class="flow-title">카드 만들기</div>
           <p class="flow-text">팀별 대표 기기에서 마스터 카드 1장을 완성합니다.</p>
         </article>
         <article class="flow-item" style="--c:#26BDE2" role="listitem" onclick="setLessonStep(3)" tabindex="0" aria-label="4단계: 직소 회의">
           <div class="flow-active-badge">현재 단계</div>
           <div class="flow-num">4</div>
+          <span class="flow-emoji">🤝</span>
           <div class="flow-title">직소 회의</div>
           <p class="flow-text">같은 역할끼리 모여 설명 방법을 준비합니다.</p>
         </article>
         <article class="flow-item" style="--c:#FD9D24" role="listitem" onclick="setLessonStep(4)" tabindex="0" aria-label="5단계: 패들렛 공유">
           <div class="flow-active-badge">현재 단계</div>
           <div class="flow-num">5</div>
+          <span class="flow-emoji">📤</span>
           <div class="flow-title">패들렛 공유</div>
           <p class="flow-text">카드 결과물과 팀원 역할만 간단히 올립니다.</p>
         </article>
         <article class="flow-item" style="--c:#A21942" role="listitem" onclick="setLessonStep(5)" tabindex="0" aria-label="6단계: 전체 발표">
           <div class="flow-active-badge">현재 단계</div>
           <div class="flow-num">6</div>
+          <span class="flow-emoji">🎤</span>
           <div class="flow-title">전체 발표</div>
           <p class="flow-text">카드 설명사를 중심으로 팀 카드를 발표합니다.</p>
         </article>
@@ -760,8 +776,8 @@
     <section class="section" id="records" aria-labelledby="records-title">
       <div class="section-head">
         <div>
-          <h2 id="records-title"><span class="ms fill">edit_note</span> 직소 팀별 회의 기록장</h2>
-          <p class="section-desc">역할별 전문가 모임에서 기록한 뒤, 원래 팀으로 돌아가 공유합니다.</p>
+          <h2 id="records-title"><span class="ms fill">edit_note</span> 우리 팀 기록장</h2>
+          <p class="section-desc">내 역할을 골라 질문에 답해 보세요. 다 쓰면 원래 팀에서 함께 나눠요!</p>
         </div>
         <div class="tools">
           <button class="tool-btn primary" type="button" onclick="saveRecords()"><span class="ms">save</span> 저장</button>
@@ -785,7 +801,7 @@
 
       <!-- 역할 선택 -->
       <div class="role-selector-box" aria-label="내 역할 선택">
-        <p class="role-selector-q"><span class="ms fill">person_raised_hand</span> 내 역할을 선택하면 내 기록장이 강조됩니다!</p>
+        <p class="role-selector-q">✋ 나는 어떤 역할인가요? 눌러서 선택하세요!</p>
         <div class="role-sel-grid" role="group" aria-label="역할 선택">
           <button class="role-sel-btn" style="--rc:#2F5E9E" data-role="sdgs" onclick="selectRole('sdgs')" aria-pressed="false" type="button">
             <div class="rs-icon"><span class="ms fill">travel_explore</span></div>
@@ -1045,36 +1061,30 @@ SDGs 탐색가: 민준
         unit.className = 'step-unit';
 
         const node = document.createElement('button');
-        node.className = 'step-node' + (i === currentStep ? ' active' : '') + (i < currentStep ? ' done' : '');
-        node.setAttribute('type', 'button');
-        node.setAttribute('aria-label', `${i+1}단계: ${s.label.replace('\n',' ')}`);
-        node.setAttribute('aria-pressed', i === currentStep ? 'true' : 'false');
+        const isDone   = i < currentStep;
+        const isActive = i === currentStep;
+        node.className = 'step-node' + (isActive ? ' active' : '') + (isDone ? ' done' : '');
+        node.type = 'button';
+        node.setAttribute('aria-label', `${i+1}단계: ${s.label.replace(/\n/g,' ')}`);
+        node.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         node.style.setProperty('--sc', s.color);
         node.onclick = () => setLessonStep(i);
 
         const circle = document.createElement('div');
         circle.className = 'step-circle';
-        if (i < currentStep) {
-          circle.textContent = '✓';
-          circle.style.color = '#4C9F38';
-          circle.style.background = '#e8f4e8';
-          circle.style.borderColor = '#4C9F38';
-          circle.style.border = '2px solid #4C9F38';
-        } else {
-          circle.textContent = i + 1;
-        }
+        /* 완료 단계는 ✓, 나머지는 숫자 — CSS 클래스로만 색상 제어 */
+        circle.textContent = isDone ? '✓' : i + 1;
 
         const lbl = document.createElement('div');
         lbl.className = 'step-label-text';
-        lbl.style.whiteSpace = 'pre';
-        lbl.textContent = s.label;
+        lbl.textContent = s.label.replace(/\n/g, ' ');
 
         node.append(circle, lbl);
         unit.appendChild(node);
 
         if (i < stepData.length - 1) {
           const conn = document.createElement('div');
-          conn.className = 'step-connector' + (i < currentStep ? ' done' : '');
+          conn.className = 'step-connector' + (isDone ? ' done' : '');
           unit.appendChild(conn);
         }
 
